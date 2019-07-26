@@ -1,4 +1,4 @@
-<?php
+
 
 /**
 * Adds an current_page_parent class to any post type and removes current_page_parent from main posts if needed
@@ -20,8 +20,9 @@ function nav_parent_class($classes, $item) {
   //Get first part of the string after the domain
   $path  = $breakapart['1'];
 
+
   //check it's not the hompage and that it's not a sub menu article
-  if($path && empty($endofurl[2])){
+  if($path && empty($breakapart[2])){
     //add class if the url is contained inside the menu item
     if (strpos($url, $path) !== false) {
       $classes[] = 'current_page_parent';
@@ -39,3 +40,5 @@ function nav_parent_class($classes, $item) {
   }
   return $classes;
 }
+
+add_filter('nav_menu_css_class', 'nav_parent_class', 10, 2);
